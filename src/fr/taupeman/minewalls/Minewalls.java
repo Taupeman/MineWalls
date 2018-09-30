@@ -1,5 +1,7 @@
 package fr.taupeman.minewalls;
 
+import fr.taupeman.minewalls.Player.Event.PlayerJoin;
+import fr.taupeman.minewalls.Player.Event.PlayerQuit;
 import fr.taupeman.minewalls.Player.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -21,6 +23,13 @@ public class Minewalls extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        for(Player player: Bukkit.getOnlinePlayers()) {
+            if (getPlayer(player) == null) getPlayerDataList().add(new PlayerData(player));
+        }
+
+        Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
 
         Bukkit.getConsoleSender().sendMessage(ENABLE_MESSAGE);
     }

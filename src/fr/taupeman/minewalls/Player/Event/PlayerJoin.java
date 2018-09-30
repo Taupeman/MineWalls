@@ -1,6 +1,7 @@
 package fr.taupeman.minewalls.Player.Event;
 
 import fr.taupeman.minewalls.Minewalls;
+import fr.taupeman.minewalls.Player.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,5 +13,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        if (instance.getPlayer(player) == null) instance.getPlayerDataList().add(new PlayerData(player));
+        event.setJoinMessage(player.getDisplayName() + " est arrivé(e)");
     }
 }
