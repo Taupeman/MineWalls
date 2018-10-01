@@ -3,3 +3,5 @@ author: Taupeman
 version: 1.0.0
 main: fr.taupeman.minewalls.Minewalls
 commands:
+  kits:
+    description: Ouvre un menu pour les kits

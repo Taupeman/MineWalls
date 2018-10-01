@@ -1,5 +1,7 @@
 package fr.taupeman.minewalls;
 
+import fr.taupeman.minewalls.Command.CommandKits;
+import fr.taupeman.minewalls.Game.GameStatus;
 import fr.taupeman.minewalls.Player.Event.PlayerJoin;
 import fr.taupeman.minewalls.Player.Event.PlayerQuit;
 import fr.taupeman.minewalls.Player.PlayerData;
@@ -23,6 +25,7 @@ public class Minewalls extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        GameStatus.setAllNotStart();
 
         for(Player player: Bukkit.getOnlinePlayers()) {
             if (getPlayer(player) == null) getPlayerDataList().add(new PlayerData(player));
@@ -30,6 +33,8 @@ public class Minewalls extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
+
+        getCommand("kits").setExecutor(new CommandKits());
 
         Bukkit.getConsoleSender().sendMessage(ENABLE_MESSAGE);
     }
